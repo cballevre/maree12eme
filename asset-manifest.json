@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/methodo12eme/static/css/main.8c8b27cf.chunk.css",
+    "main.js": "/methodo12eme/static/js/main.46f4c027.chunk.js",
+    "main.js.map": "/methodo12eme/static/js/main.46f4c027.chunk.js.map",
+    "runtime-main.js": "/methodo12eme/static/js/runtime-main.4ac06ea3.js",
+    "runtime-main.js.map": "/methodo12eme/static/js/runtime-main.4ac06ea3.js.map",
+    "static/js/2.1950e7df.chunk.js": "/methodo12eme/static/js/2.1950e7df.chunk.js",
+    "static/js/2.1950e7df.chunk.js.map": "/methodo12eme/static/js/2.1950e7df.chunk.js.map",
+    "static/js/3.6bba896a.chunk.js": "/methodo12eme/static/js/3.6bba896a.chunk.js",
+    "static/js/3.6bba896a.chunk.js.map": "/methodo12eme/static/js/3.6bba896a.chunk.js.map",
+    "index.html": "/methodo12eme/index.html",
+    "static/css/main.8c8b27cf.chunk.css.map": "/methodo12eme/static/css/main.8c8b27cf.chunk.css.map",
+    "static/js/2.1950e7df.chunk.js.LICENSE.txt": "/methodo12eme/static/js/2.1950e7df.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/methodo12eme/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4ac06ea3.js",
+    "static/js/2.1950e7df.chunk.js",
+    "static/css/main.8c8b27cf.chunk.css",
+    "static/js/main.46f4c027.chunk.js"
+  ]
+}
