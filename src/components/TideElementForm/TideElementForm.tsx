@@ -17,6 +17,7 @@ interface Props {
 
 interface Fields {
   start: TideElement;
+  end: TideElement;
 }
 
 const TideElementField: React.FC<Props> = ({ namespace }) => {
@@ -33,7 +34,7 @@ const TideElementField: React.FC<Props> = ({ namespace }) => {
           labelId="starting-type-label"
           name={withNamespace(TYPE)}
           label="Type"
-          value={formik.values.start.type}
+          value={formik.values[namespace as keyof Fields].type}
           onChange={formik.handleChange}
         >
           <MenuItem value={1}>PM</MenuItem>
@@ -45,7 +46,7 @@ const TideElementField: React.FC<Props> = ({ namespace }) => {
         type="date"
         label="Date"
         variant="outlined"
-        value={formik.values.start.date}
+        value={formik.values[namespace as keyof Fields].date}
         onChange={formik.handleChange}
       />
       <TextField
@@ -53,7 +54,7 @@ const TideElementField: React.FC<Props> = ({ namespace }) => {
         type="time"
         label="Heure"
         variant="outlined"
-        value={formik.values.start.time}
+        value={formik.values[namespace as keyof Fields].time}
         onChange={formik.handleChange}
       />
       <TextField
@@ -61,11 +62,10 @@ const TideElementField: React.FC<Props> = ({ namespace }) => {
         label="Hauteur"
         variant="outlined"
         inputProps={{
-          inputMode: 'decimal',
-          pattern: '[0-9]{0,2}[.,][0-9]{0,2}',
+          type: 'number',
           step: '0.01',
         }}
-        value={formik.values.start.height}
+        value={formik.values[namespace as keyof Fields].height}
         onChange={formik.handleChange}
       />
     </Box>

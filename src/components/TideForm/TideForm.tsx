@@ -1,21 +1,36 @@
 import { Formik, Form } from 'formik';
 import React from 'react';
 import Button from '@mui/material/Button/Button';
-import { Tide } from '../../models/tide';
+import { Tide, TideElement } from '../../models/tide';
 import TideElementField from '../TideElementForm/TideElementForm';
 import validationSchema from './validationSchema';
 import defaultValues from './defaultValues';
-import { START } from './fieldsNames';
+import { END, START } from './fieldsNames';
+import dayjs, { type Dayjs } from 'dayjs';
 
 interface Props {
   onSubmit: (data: Tide) => void;
 }
 
+interface FormValues {
+  start: TideElement;
+  end: TideElement;
+}
+
 const TideForm: React.FC<Props> = ({ onSubmit }) => {
-  const onFormSubmit = (values: any): void => {
-    console.log('hello');
-    console.log(values);
-    alert(JSON.stringify(values, null, 2));
+  const onFormSubmit = (values: FormValues): void => {
+    const startingAt: Dayjs = dayjs(
+      `${String(values.start.date)} ${values.start.time}`
+    );
+    const endingAt: Dayjs = dayjs(`${values.end.date} ${values.end.time}`);
+    const duration: number = Math.abs(startingAt.diff(endingAt, 'minutes'));
+
+    onSubmit({
+      ...values,
+      duration,
+      hour: Math.abs(duration / 6),
+      range: Math.abs(values.end.height - values.start.height),
+    });
   };
 
   return (
@@ -26,7 +41,7 @@ const TideForm: React.FC<Props> = ({ onSubmit }) => {
     >
       <Form>
         <TideElementField namespace={START} />
-
+        <TideElementField namespace={END} />
         <Button color="primary" variant="contained" fullWidth type="submit">
           Calculer
         </Button>
