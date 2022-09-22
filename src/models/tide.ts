@@ -12,3 +12,12 @@ export interface TideElement {
   time: string;
   height: number;
 }
+
+export interface TideFragment {
+  hour: any;
+  index: number;
+  label: string;
+  date: string;
+  time: string;
+  height: number;
+}

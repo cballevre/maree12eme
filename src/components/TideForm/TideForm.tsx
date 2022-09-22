@@ -20,7 +20,7 @@ interface FormValues {
 const TideForm: React.FC<Props> = ({ onSubmit }) => {
   const onFormSubmit = (values: FormValues): void => {
     const startingAt: Dayjs = dayjs(
-      `${String(values.start.date)} ${values.start.time}`
+      `${values.start.date} ${values.start.time}`
     );
     const endingAt: Dayjs = dayjs(`${values.end.date} ${values.end.time}`);
     const duration: number = Math.abs(startingAt.diff(endingAt, 'minutes'));
