@@ -105,7 +105,11 @@ const TideDisplay: React.FC<Props> = ({ tide }) => {
         />
         <Typography>Liste</Typography>
       </Stack>
-      {displayType ? <TideChartDisplay /> : <TideTableDisplay rows={data} />}
+      {displayType ? (
+        <TideChartDisplay rows={data} />
+      ) : (
+        <TideTableDisplay rows={data} />
+      )}
     </Box>
   );
 };
