@@ -12,7 +12,7 @@ interface Props {
 const TideDisplay: React.FC<Props> = ({ tide }) => {
   const [displayType, setDisplayType] = useState<boolean>(true);
 
-  const isTideRising = tide.start.type === 1;
+  const isTideRising = tide.start.type === 0;
 
   const test = (
     previousValue: TideFragment[],
@@ -49,19 +49,19 @@ const TideDisplay: React.FC<Props> = ({ tide }) => {
 
     switch (index) {
       case 1:
-        label = isTideRising ? 'PM' : 'BM';
+        label = isTideRising ? 'BM' : 'PM';
         date = tide.start.date;
         time = tide.start.time;
         height = tide.start.height;
         break;
       case 7:
-        label = isTideRising ? 'BM' : 'PM';
+        label = isTideRising ? 'PM' : 'BM';
         date = tide.end.date;
         time = tide.end.time;
         height = tide.end.height;
         break;
       default:
-        label = isTideRising ? `PM +${index}` : `PM -${7 - index}`;
+        label = isTideRising ? `PM -${7 - index}` : `PM +${index}`;
         date =
           computedDatetime !== undefined
             ? computedDatetime.format('YYYY-MM-DD')
@@ -71,14 +71,26 @@ const TideDisplay: React.FC<Props> = ({ tide }) => {
             ? computedDatetime.format('HH:mm')
             : '';
 
+        height = Number(previousTideFragment.height);
         if (index === 3 || index === 6) {
-          height = Number(previousTideFragment.height) + tide.range * (2 / 12);
+          if (isTideRising) {
+            height += tide.range * (2 / 12);
+          } else {
+            height -= tide.range * (2 / 12);
+          }
         } else if (index === 4 || index === 5) {
-          height = Number(previousTideFragment.height) + tide.range * (3 / 12);
+          if (isTideRising) {
+            height += tide.range * (3 / 12);
+          } else {
+            height -= tide.range * (3 / 12);
+          }
         } else {
-          height = Number(previousTideFragment.height) + tide.range * (1 / 12);
+          if (isTideRising) {
+            height += tide.range * (1 / 12);
+          } else {
+            height -= tide.range * (1 / 12);
+          }
         }
-
         break;
     }
 
