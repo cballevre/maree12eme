@@ -8,6 +8,7 @@ const App: React.FC = () => {
   const [tide, setTide] = useState<Tide | null>(null);
   return (
     <Container maxWidth="sm">
+      <h1>Calculateur de marée (règle des douzièmes)</h1>
       <TideForm onSubmit={(data) => setTide(data)}></TideForm>
       {tide !== null && <TideDisplay tide={tide} />}
     </Container>

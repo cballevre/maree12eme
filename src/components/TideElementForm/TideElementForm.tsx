@@ -1,5 +1,5 @@
 import {
-  Box,
+  Stack,
   FormControl,
   InputLabel,
   Select,
@@ -27,7 +27,13 @@ const TideElementField: React.FC<Props> = ({ namespace }) => {
   const formik = useFormikContext<Fields>();
 
   return (
-    <Box mt={2}>
+    <Stack
+      direction="row"
+      justifyContent="space-between"
+      alignItems="center"
+      spacing={2}
+      mt={2}
+    >
       <FormControl>
         <InputLabel id="starting-type-label">Type</InputLabel>
         <Select
@@ -68,7 +74,7 @@ const TideElementField: React.FC<Props> = ({ namespace }) => {
         value={formik.values[namespace as keyof Fields].height}
         onChange={formik.handleChange}
       />
-    </Box>
+    </Stack>
   );
 };
 
