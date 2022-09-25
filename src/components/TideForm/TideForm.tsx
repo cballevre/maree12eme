@@ -1,20 +1,19 @@
 import { Formik, Form } from 'formik';
 import React from 'react';
-import Button from '@mui/material/Button/Button';
 import { Tide, TideElement } from '../../models/tide';
 import TideElementField from '../TideElementForm/TideElementForm';
 import validationSchema from './validationSchema';
 import defaultValues from './defaultValues';
 import { END, START, IS_RISING } from './fieldsNames';
 import dayjs, { type Dayjs } from 'dayjs';
-import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { FormControl, FormLabel, Select, Box, Button } from '@chakra-ui/react';
 
 interface Props {
   onSubmit: (data: Tide) => void;
 }
 
 interface FormValues {
-  isRising: boolean;
+  isRising: number;
   start: TideElement;
   end: TideElement;
 }
@@ -44,23 +43,22 @@ const TideForm: React.FC<Props> = ({ onSubmit }) => {
       {(formik) => (
         <Form>
           <FormControl>
-            <InputLabel id="starting-type-label">Type</InputLabel>
+            <FormLabel>Type</FormLabel>
             <Select
-              labelId="starting-type-label"
               name={IS_RISING}
-              label="Type"
               value={formik.values[IS_RISING]}
               onChange={formik.handleChange}
+              placeholder="Select option"
             >
-              <MenuItem value={false as any}>PM</MenuItem>
-              <MenuItem value={true as any}>BM</MenuItem>
+              <option value={0}>PM</option>
+              <option value={1}>BM</option>
             </Select>
           </FormControl>
           <TideElementField namespace={START} />
-          <p>{formik.values[IS_RISING] ? 'PM' : 'BM'}</p>
+          <p>{formik.values[IS_RISING] === 1 ? 'PM' : 'BM'}</p>
           <TideElementField namespace={END} />
           <Box mt={2}>
-            <Button color="primary" variant="contained" fullWidth type="submit">
+            <Button color="primary" variant="contained" type="submit">
               Calculer
             </Button>
           </Box>

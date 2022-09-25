@@ -1,12 +1,16 @@
 import React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import { TideFragment } from '../../models/tide';
+
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer,
+} from '@chakra-ui/react';
 
 interface Props {
   rows: TideFragment[];
@@ -14,28 +18,25 @@ interface Props {
 
 const TideTableDisplay: React.FC<Props> = ({ rows }) => {
   return (
-    <TableContainer component={Paper}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell></TableCell>
-            <TableCell align="right">Heure</TableCell>
-            <TableCell align="right">Hauteur (m)</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
+    <TableContainer>
+      <Table variant="striped">
+        <TableCaption>Imperial to metric conversion factors</TableCaption>
+        <Thead>
+          <Tr>
+            <Th></Th>
+            <Th>Heure</Th>
+            <Th isNumeric>Hauteur (m)</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
           {rows.map((row) => (
-            <TableRow key={row.index}>
-              <TableCell component="th" scope="row">
-                {row.label}
-              </TableCell>
-              <TableCell align="right">{row.time}</TableCell>
-              <TableCell align="right">
-                {Math.round(row.height * 100) / 100}
-              </TableCell>
-            </TableRow>
+            <Tr key={row.index}>
+              <Td>{row.label}</Td>
+              <Td>{row.time}</Td>
+              <Td isNumeric>{Math.round(row.height * 100) / 100}</Td>
+            </Tr>
           ))}
-        </TableBody>
+        </Tbody>
       </Table>
     </TableContainer>
   );

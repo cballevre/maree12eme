@@ -1,9 +1,9 @@
-import { Box, Stack, Switch, Typography } from '@mui/material';
 import React, { useState, useCallback } from 'react';
 import { Tide, TideFragment } from '../../models/tide';
 import TideChartDisplay from '../TideChartDisplay/TideChartDisplay';
 import TideTableDisplay from '../TideTableDisplay/TideTableDisplay';
 import dayjs, { Dayjs } from 'dayjs';
+import { Stack, Switch, Box, Text } from '@chakra-ui/react';
 
 interface Props {
   tide: Tide;
@@ -12,7 +12,7 @@ interface Props {
 const TideDisplay: React.FC<Props> = ({ tide }) => {
   const [displayType, setDisplayType] = useState<boolean>(true);
 
-  const isTideRising = tide.isRising;
+  const isTideRising = tide.isRising === 1;
 
   const test = (
     previousValue: TideFragment[],
@@ -110,12 +110,12 @@ const TideDisplay: React.FC<Props> = ({ tide }) => {
   return (
     <Box>
       <Stack direction="row" spacing={1} alignItems="center">
-        <Typography>Graphique</Typography>
+        <Text>Graphique</Text>
         <Switch
           checked={displayType}
           onChange={() => setDisplayType(!displayType)}
         />
-        <Typography>Liste</Typography>
+        <Text>Liste</Text>
       </Stack>
       {displayType ? (
         <TideChartDisplay rows={data} />

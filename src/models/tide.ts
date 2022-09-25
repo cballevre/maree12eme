@@ -1,5 +1,5 @@
 export interface Tide {
-  isRising: boolean;
+  isRising: number;
   start: TideElement;
   end: TideElement;
   duration: number;
