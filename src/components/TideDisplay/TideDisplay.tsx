@@ -12,7 +12,7 @@ interface Props {
 const TideDisplay: React.FC<Props> = ({ tide }) => {
   const [displayType, setDisplayType] = useState<boolean>(true);
 
-  const isTideRising = tide.start.type === 0;
+  const isTideRising = tide.isRising;
 
   const test = (
     previousValue: TideFragment[],

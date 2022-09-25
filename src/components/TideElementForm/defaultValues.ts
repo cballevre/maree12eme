@@ -1,8 +1,7 @@
-import { TYPE, DATE, TIME, HEIGHT } from './fieldsNames';
+import { DATE, TIME, HEIGHT } from './fieldsNames';
 
 export default {
-  [TYPE]: 0,
-  [DATE]: '',
+  [DATE]: new Date().toISOString().slice(0, 10),
   [TIME]: '',
   [HEIGHT]: 0,
 };

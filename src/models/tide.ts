@@ -1,4 +1,5 @@
 export interface Tide {
+  isRising: boolean;
   start: TideElement;
   end: TideElement;
   duration: number;
@@ -7,7 +8,6 @@ export interface Tide {
 }
 
 export interface TideElement {
-  type: number;
   date: string;
   time: string;
   height: number;
