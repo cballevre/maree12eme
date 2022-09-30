@@ -8,7 +8,6 @@ import {
   Tr,
   Th,
   Td,
-  TableCaption,
   TableContainer,
 } from '@chakra-ui/react';
 
@@ -20,7 +19,6 @@ const TideTableDisplay: React.FC<Props> = ({ rows }) => {
   return (
     <TableContainer>
       <Table variant="striped">
-        <TableCaption>Imperial to metric conversion factors</TableCaption>
         <Thead>
           <Tr>
             <Th></Th>

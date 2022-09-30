@@ -6,7 +6,15 @@ import validationSchema from './validationSchema';
 import defaultValues from './defaultValues';
 import { END, START, IS_RISING } from './fieldsNames';
 import dayjs, { type Dayjs } from 'dayjs';
-import { FormControl, FormLabel, Select, Box, Button } from '@chakra-ui/react';
+import {
+  FormControl,
+  Select,
+  Box,
+  Button,
+  Text,
+  HStack,
+  Divider,
+} from '@chakra-ui/react';
 
 interface Props {
   onSubmit: (data: Tide) => void;
@@ -41,28 +49,35 @@ const TideForm: React.FC<Props> = ({ onSubmit }) => {
       onSubmit={onFormSubmit}
     >
       {(formik) => (
-        <Form>
-          <FormControl>
-            <FormLabel>Type</FormLabel>
-            <Select
-              name={IS_RISING}
-              value={formik.values[IS_RISING]}
-              onChange={formik.handleChange}
-              placeholder="Select option"
-            >
-              <option value={0}>PM</option>
-              <option value={1}>BM</option>
-            </Select>
-          </FormControl>
-          <TideElementField namespace={START} />
-          <p>{formik.values[IS_RISING] === 1 ? 'PM' : 'BM'}</p>
-          <TideElementField namespace={END} />
-          <Box mt={2}>
-            <Button color="primary" variant="contained" type="submit">
-              Calculer
-            </Button>
-          </Box>
-        </Form>
+        <Box p={6} bg="gray.200" borderRadius={6} mb={6}>
+          <Form>
+            <FormControl>
+              <Select
+                variant="filled"
+                bg="white"
+                name={IS_RISING}
+                value={formik.values[IS_RISING]}
+                onChange={formik.handleChange}
+                mb={2}
+                width={24}
+              >
+                <option value={0}>PM</option>
+                <option value={1}>BM</option>
+              </Select>
+            </FormControl>
+            <TideElementField namespace={START} />
+            <HStack mb={2}>
+              <Text as="b">{formik.values[IS_RISING] === 1 ? 'PM' : 'BM'}</Text>
+              <Divider borderColor="black" />
+            </HStack>
+            <TideElementField namespace={END} />
+            <Box mt={4}>
+              <Button colorScheme="teal" variant="solid" type="submit">
+                Calculer
+              </Button>
+            </Box>
+          </Form>
+        </Box>
       )}
     </Formik>
   );
