@@ -16,6 +16,6 @@
     },
     "plugins": ["react"],
     "rules": {
-        "@typescript-eslint/triple-slash-reference": "warn"
+        "@typescript-eslint/triple-slash-reference": "off"
     }
 }
