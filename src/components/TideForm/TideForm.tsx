@@ -57,7 +57,12 @@ const TideForm: React.FC<Props> = ({ onSubmit }) => {
                 bg="white"
                 name={IS_RISING}
                 value={formik.values[IS_RISING]}
-                onChange={formik.handleChange}
+                onChange={(evt) => {
+                  formik.setFieldValue(
+                    "isRising",
+                    parseInt(evt.target.value)
+                  );
+                }}
                 mb={2}
                 width={24}
               >
