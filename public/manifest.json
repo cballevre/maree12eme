@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Marée 12ème",
+  "name": "Marée 12ème - Calculateur de marée selon la règle des douzièmes",
   "icons": [
     {
       "src": "favicon.ico",
