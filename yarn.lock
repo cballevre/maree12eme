@@ -301,7 +301,7 @@
     "@babel/helper-validator-identifier" "^7.24.7"
     to-fast-properties "^2.0.0"
 
-"@chakra-ui/react@^3.19.2":
+"@chakra-ui/react@3.19.2":
   version "3.19.2"
   resolved "https://registry.yarnpkg.com/@chakra-ui/react/-/react-3.19.2.tgz#7c88106413f53d93734a308d1acefedbdbc4d9b4"
   integrity sha512-ZQfYXQ20ftR1U8kdwDxqx4qk8+8y9RcReb2heptAFD6IBnTg2dOylfjS7Qj2WF7mkPHnWd0W1/FUWDjJD1OgVQ==
@@ -360,7 +360,7 @@
   resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.9.0.tgz#745969d649977776b43fc7648c556aaa462b4102"
   integrity sha512-30FAj7/EoJ5mwVPOWhAyCX+FPfMDrVecJAM+Iw9NRoSl4BBAQeqj4cApHHUXOVvIPgLVDsCFoz/hGD+5QQD1GQ==
 
-"@emotion/react@^11.14.0":
+"@emotion/react@11.14.0":
   version "11.14.0"
   resolved "https://registry.yarnpkg.com/@emotion/react/-/react-11.14.0.tgz#cfaae35ebc67dd9ef4ea2e9acc6cd29e157dd05d"
   integrity sha512-O000MLDBDdk/EohJPFUqvnp4qnHeYkVP5B0xEG0D/L7cOKP9kefu2DXn8dj74cQfsEzUqh+sr1RzFqiL1o+PpA==
