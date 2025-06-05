@@ -21,8 +21,8 @@ jobs:
       - name: Build project 🛠️
         run: yarn build
       - name: Add .nojekyll file
-        run: touch ./build/.nojekyll
+        run: touch ./dist/.nojekyll
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: build
+          folder: dist
