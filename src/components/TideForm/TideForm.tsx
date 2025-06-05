@@ -7,13 +7,12 @@ import defaultValues from './defaultValues';
 import { END, START, IS_RISING } from './fieldsNames';
 import dayjs, { type Dayjs } from 'dayjs';
 import {
-  FormControl,
-  Select,
+  NativeSelect,
   Box,
   Button,
   Text,
   HStack,
-  Divider,
+  Separator,
 } from '@chakra-ui/react';
 
 interface Props {
@@ -51,33 +50,27 @@ const TideForm: React.FC<Props> = ({ onSubmit }) => {
       {(formik) => (
         <Box p={6} bg="gray.200" borderRadius={6} mb={6}>
           <Form>
-            <FormControl>
-              <Select
-                variant="filled"
-                bg="white"
+            <NativeSelect.Root variant="subtle" mb={2} width={24}>
+              <NativeSelect.Field
                 name={IS_RISING}
                 value={formik.values[IS_RISING]}
                 onChange={(evt) => {
-                  formik.setFieldValue(
-                    "isRising",
-                    parseInt(evt.target.value)
-                  );
+                  formik.setFieldValue('isRising', parseInt(evt.target.value));
                 }}
-                mb={2}
-                width={24}
               >
                 <option value={0}>PM</option>
                 <option value={1}>BM</option>
-              </Select>
-            </FormControl>
+              </NativeSelect.Field>
+              <NativeSelect.Indicator />
+            </NativeSelect.Root>
             <TideElementField namespace={START} />
             <HStack mb={2}>
-              <Text as="b">{formik.values[IS_RISING] === 1 ? 'PM' : 'BM'}</Text>
-              <Divider borderColor="black" />
+              <Text as="b" flexShrink={0}>{formik.values[IS_RISING] === 1 ? 'PM' : 'BM'}</Text>
+              <Separator flex="1" borderColor="black" />
             </HStack>
             <TideElementField namespace={END} />
             <Box mt={4}>
-              <Button colorScheme="teal" variant="solid" type="submit">
+              <Button colorPalette="teal" variant="solid" type="submit">
                 Calculer
               </Button>
             </Box>
