@@ -3,11 +3,10 @@ import React from 'react';
 import { TideElement } from '../../models/tide';
 import { DATE, TIME, HEIGHT } from './fieldsNames';
 import {
-  FormControl,
-  FormLabel,
   Input,
   Wrap,
   WrapItem,
+  Field,
 } from '@chakra-ui/react';
 
 interface Props {
@@ -26,39 +25,35 @@ const TideElementField: React.FC<Props> = ({ namespace }) => {
   const formik = useFormikContext<Fields>();
 
   return (
-    <Wrap spacing={4} mb={4}>
+    <Wrap gap={4} mb={4}>
       <WrapItem>
-        <FormControl>
-          <FormLabel>Date</FormLabel>
+        <Field.Root>
+          <Field.Label>Date</Field.Label>
           <Input
-            variant="filled"
-            bg="white"
             name={withNamespace(DATE)}
             type="date"
             value={formik.values[namespace as keyof Fields].date}
             onChange={formik.handleChange}
+            variant="subtle"
           />
-        </FormControl>
+        </Field.Root>
       </WrapItem>
       <WrapItem>
-        <FormControl>
-          <FormLabel>Heure</FormLabel>
+        <Field.Root>
+          <Field.Label>Heure</Field.Label>
           <Input
-            variant="filled"
-            bg="white"
             name={withNamespace(TIME)}
             type="time"
             value={formik.values[namespace as keyof Fields].time}
             onChange={formik.handleChange}
+            variant="subtle"
           />
-        </FormControl>
+        </Field.Root>
       </WrapItem>
       <WrapItem>
-        <FormControl>
-          <FormLabel>Hauteur</FormLabel>
+        <Field.Root>
+          <Field.Label>Hauteur</Field.Label>
           <Input
-            variant="filled"
-            bg="white"
             name={withNamespace(HEIGHT)}
             type="number"
             step={0.01}
@@ -67,8 +62,9 @@ const TideElementField: React.FC<Props> = ({ namespace }) => {
             htmlSize={4}
             value={formik.values[namespace as keyof Fields].height}
             onChange={formik.handleChange}
+            variant="subtle"
           />
-        </FormControl>
+        </Field.Root>
       </WrapItem>
     </Wrap>
   );

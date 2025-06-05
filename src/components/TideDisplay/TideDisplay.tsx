@@ -35,8 +35,7 @@ const TideDisplay: React.FC<Props> = ({ tide }) => {
           ).add(tide.hour, 'minute')
         : undefined;
 
-    /* 
-    
+    /*
     height 1: start
     height 2: 1/6
     height 3: 2/6
@@ -44,7 +43,6 @@ const TideDisplay: React.FC<Props> = ({ tide }) => {
     height 5: 3/6
     height 6: 2/6
     height 7: end
-    
     */
 
     switch (index) {
@@ -109,12 +107,19 @@ const TideDisplay: React.FC<Props> = ({ tide }) => {
 
   return (
     <Box>
-      <Stack direction="row" spacing={1} alignItems="center">
+      <Stack direction="row" gap={1} alignItems="center">
         <Text>Graphique</Text>
-        <Switch
+        <Switch.Root
+          colorPalette="teal"
           checked={displayType}
           onChange={() => setDisplayType(!displayType)}
-        />
+        >
+          <Switch.HiddenInput />
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          <Switch.Label />
+        </Switch.Root>
         <Text>Liste</Text>
       </Stack>
       {displayType ? (
