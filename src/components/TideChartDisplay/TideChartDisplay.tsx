@@ -7,6 +7,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  CategoryScale
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
@@ -14,6 +15,7 @@ import { TwelveTideScale } from './TwelveTideScale';
 import { TideFragment } from '../../models/tide';
 
 ChartJS.register(
+  CategoryScale,
   LinearScale,
   PointElement,
   LineElement,
