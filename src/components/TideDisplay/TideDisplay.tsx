@@ -107,7 +107,7 @@ const TideDisplay: React.FC<Props> = ({ tide }) => {
 
   return (
     <Box>
-      <Stack direction="row" gap={1} alignItems="center">
+      <Stack direction="row" gap={1} alignItems="center" mb={4}>
         <Text>Graphique</Text>
         <Switch.Root
           colorPalette="teal"
