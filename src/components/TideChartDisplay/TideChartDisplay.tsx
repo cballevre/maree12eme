@@ -60,6 +60,7 @@ const TideChartDisplay: React.FC<Props> = ({ rows }) => {
     ],
   };
 
+  // @ts-expect-error
   return <Line options={options} data={data} />;
 };
 
