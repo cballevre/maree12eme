@@ -23,7 +23,6 @@
         "typescript": "*",
         "vite": "^5.3.5",
         "vite-tsconfig-paths": "^4.3.2",
-        "web-vitals": "^2.1.4",
         "workbox-background-sync": "^6.5.4",
         "workbox-broadcast-update": "^6.5.4",
         "workbox-cacheable-response": "^6.5.4",
