@@ -18,7 +18,8 @@
         "start": "vite",
         "build": "tsc && vite build",
         "preview": "vite preview",
-        "lint": "eslint --ext .ts .tsx ."
+        "lint": "eslint --ext .ts .tsx .",
+        "generate-pwa-assets": "pwa-assets-generator --preset minimal-2023 public/logo.svg"
     },
     "browserslist": {
         "production": [
@@ -41,6 +42,7 @@
         "@types/react": "^18.0.20",
         "@types/react-dom": "^18.0.6",
         "@typescript-eslint/eslint-plugin": "^5.0.0",
+        "@vite-pwa/assets-generator": "^1.0.0",
         "@vitejs/plugin-react": "^4.3.1",
         "eslint": "^8.0.1",
         "eslint-config-prettier": "^8.5.0",
