@@ -11,7 +11,7 @@ const App: React.FC = () => {
   return (
     <ChakraProvider value={defaultSystem}>
       <Container maxWidth="lg" mt={10}>
-        <Heading as="h1" mb={1} size="4xl" color="teal.500">
+        <Heading as="h1" mb={1} size="4xl" color="blue.500">
           Calculateur de marée
         </Heading>
         <Text mb={6} fontSize="lg">

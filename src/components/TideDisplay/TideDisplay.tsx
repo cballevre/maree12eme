@@ -110,7 +110,7 @@ const TideDisplay: React.FC<Props> = ({ tide }) => {
       <Stack direction="row" gap={1} alignItems="center" mb={4}>
         <Text>Graphique</Text>
         <Switch.Root
-          colorPalette="teal"
+          colorPalette="orange"
           checked={displayType}
           onChange={() => setDisplayType(!displayType)}
         >

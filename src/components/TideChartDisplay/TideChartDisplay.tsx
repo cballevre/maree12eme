@@ -38,14 +38,14 @@ const TideChartDisplay: React.FC<Props> = ({ rows }) => {
       }
     },
     scales: {
-      xAxis: {
+      x: {
         type: 'twelveTideScale',
         offset: true,
         ticks: {
           callback: (value: number) => rows[value].time
         }
       },
-      yAxis: {
+      y: {
         beginAtZero:true
       }
     }
@@ -56,8 +56,7 @@ const TideChartDisplay: React.FC<Props> = ({ rows }) => {
     datasets: [
       {
         data: rows.map((value) => value.height),
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        borderColor: '#fb923c'
       },
     ],
   };
