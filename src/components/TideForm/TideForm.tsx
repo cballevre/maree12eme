@@ -70,7 +70,7 @@ const TideForm: React.FC<Props> = ({ onSubmit }) => {
             </HStack>
             <TideElementField namespace={END} />
             <Box mt={4}>
-              <Button colorPalette="teal" variant="solid" type="submit">
+              <Button colorPalette="blue" variant="solid" type="submit">
                 Calculer
               </Button>
             </Box>
