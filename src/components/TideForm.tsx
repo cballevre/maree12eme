@@ -10,8 +10,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import dayjs, { type Dayjs } from "dayjs";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
-import type { Tide } from "../../models/tide";
-import TideElementField from "../TideElementForm/TideElementForm";
+import type { Tide } from "../models/tide";
+import { TideElementField } from "./TideElementForm";
 
 interface TideFormProps {
 	onSubmit: (data: Tide) => void;
@@ -50,12 +50,7 @@ const TideForm: React.FC<TideFormProps> = ({ onSubmit }) => {
 		},
 		resolver: zodResolver(schema),
 	});
-	const {
-		watch,
-		register,
-		handleSubmit,
-		formState: { errors },
-	} = methods;
+	const { watch, register, handleSubmit } = methods;
 
 	const onFormSubmit = (data: TideFormValues): void => {
 		const startingAt: Dayjs = dayjs(`${data.start.date} ${data.start.time}`);
@@ -104,4 +99,4 @@ const TideForm: React.FC<TideFormProps> = ({ onSubmit }) => {
 	);
 };
 
-export default TideForm;
+export { TideForm };

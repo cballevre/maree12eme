@@ -34,7 +34,9 @@ const TideElementField: React.FC<TideElementFieldProps> = ({ namespace }) => {
 				<Field.Root>
 					<Field.Label>Hauteur</Field.Label>
 					<Input
-						{...register(`${namespace}.height`)}
+						{...register(`${namespace}.height`, {
+							valueAsNumber: true,
+						})}
 						type="number"
 						step={0.01}
 						min={0}
@@ -48,4 +50,4 @@ const TideElementField: React.FC<TideElementFieldProps> = ({ namespace }) => {
 	);
 };
 
-export default TideElementField;
+export { TideElementField };
