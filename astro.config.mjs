@@ -4,7 +4,8 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://cballevre.github.io/maree12eme/',
+  site: 'https://cballevre.github.io',
+  base: 'maree12eme',
   integrations: [
     react(),
     AstroPWA({
