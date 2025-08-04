@@ -6,11 +6,11 @@ import {
 	Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { TideDisplay } from "./components/TideDisplay";
-import { TideForm } from "./components/TideForm";
-import type { Tide } from "./models/tide";
+import type { Tide } from "../models/tide";
+import { TideDisplay } from "./TideDisplay";
+import { TideForm } from "./TideForm";
 
-const App = () => {
+const TideCalculator = () => {
 	const [tide, setTide] = useState<Tide | null>(null);
 	return (
 		<ChakraProvider value={defaultSystem}>
@@ -28,4 +28,4 @@ const App = () => {
 	);
 };
 
-export default App;
+export { TideCalculator };

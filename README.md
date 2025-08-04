@@ -17,7 +17,7 @@ A simple web application to estimate tidal heights using the Rule of Twelves.
 
 3. **Start the development server:**
     ```bash
-    yarn start
+    yarn dev
     ```
 
-The app will be available at [http://localhost:3000](http://localhost:300) by default.
+The app will be available at [http://localhost:4321](http://localhost:4321) by default.
