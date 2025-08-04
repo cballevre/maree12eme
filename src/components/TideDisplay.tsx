@@ -2,9 +2,9 @@ import { Box, Stack, Switch, Text } from '@chakra-ui/react';
 import dayjs, { type Dayjs } from 'dayjs';
 import { type FC, useState } from 'react';
 
-import type { Tide, TideFragment } from '../models/tide';
-import { TideChartDisplay } from './TideChartDisplay';
-import { TideTableDisplay } from './TideTableDisplay';
+import { TideChartDisplay } from '@/components/TideChartDisplay';
+import { TideTableDisplay } from '@/components/TideTableDisplay';
+import type { Tide, TideFragment } from '@/models/tide';
 
 interface TideDisplayProps {
   tide: Tide;

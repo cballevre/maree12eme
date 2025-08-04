@@ -1,6 +1,6 @@
 import { Table } from '@chakra-ui/react';
 
-import type { TideFragment } from '../models/tide';
+import type { TideFragment } from '@/models/tide';
 
 interface Props {
   rows: TideFragment[];
