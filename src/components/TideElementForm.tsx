@@ -1,7 +1,7 @@
 import { Fieldset, Wrap, WrapItem } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
 
-import { FormField } from './FormField';
+import { FormField } from '@/components/FormField';
 
 interface TideElementFieldProps {
   namespace: string;

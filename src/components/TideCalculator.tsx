@@ -7,9 +7,9 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 
-import type { Tide } from '../models/tide';
-import { TideDisplay } from './TideDisplay';
-import { TideForm } from './TideForm';
+import { TideDisplay } from '@/components/TideDisplay';
+import { TideForm } from '@/components/TideForm';
+import type { Tide } from '@/models/tide';
 
 const TideCalculator = () => {
   const [tide, setTide] = useState<Tide | null>(null);

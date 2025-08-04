@@ -11,8 +11,8 @@ import dayjs, { type Dayjs } from 'dayjs';
 import { FormProvider, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import type { Tide } from '../models/tide';
-import { TideElementField } from './TideElementForm';
+import { TideElementField } from '@/components/TideElementForm';
+import type { Tide } from '@/models/tide';
 
 interface TideFormProps {
   onSubmit: (data: Tide) => void;

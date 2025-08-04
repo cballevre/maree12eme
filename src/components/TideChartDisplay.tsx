@@ -11,8 +11,8 @@ import {
 import type { FC } from 'react';
 import { Line } from 'react-chartjs-2';
 
-import type { TideFragment } from '../models/tide';
-import { TwelveTideScale } from '../utils/TwelveTideScale';
+import type { TideFragment } from '@/models/tide';
+import { TwelveTideScale } from '@/utils/TwelveTideScale';
 
 ChartJS.register(
   CategoryScale,
