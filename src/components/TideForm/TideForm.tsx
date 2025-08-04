@@ -6,10 +6,10 @@ import {
 	Separator,
 	Text,
 } from "@chakra-ui/react";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { zodResolver } from "@hookform/resolvers/zod";
 import dayjs, { type Dayjs } from "dayjs";
 import { FormProvider, useForm } from "react-hook-form";
-import * as yup from "yup";
+import { z } from "zod";
 import type { Tide } from "../../models/tide";
 import TideElementField from "../TideElementForm/TideElementForm";
 
@@ -17,37 +17,21 @@ interface TideFormProps {
 	onSubmit: (data: Tide) => void;
 }
 
-interface TideFormValues {
-	isRising: number;
-	start: {
-		date: string;
-		time: string;
-		height: number;
-	};
-	end: {
-		date: string;
-		time: string;
-		height: number;
-	};
-}
-
-const schema = yup.object({
-	isRising: yup.number().required(),
-	start: yup
-		.object({
-			date: yup.string().required(),
-			time: yup.string().required(),
-			height: yup.number().required(),
-		})
-		.required(),
-	end: yup
-		.object({
-			date: yup.string().required(),
-			time: yup.string().required(),
-			height: yup.number().required(),
-		})
-		.required(),
+const schema = z.object({
+	isRising: z.number(),
+	start: z.object({
+		date: z.string(),
+		time: z.string(),
+		height: z.number(),
+	}),
+	end: z.object({
+		date: z.string(),
+		time: z.string(),
+		height: z.number(),
+	}),
 });
+
+type TideFormValues = z.infer<typeof schema>;
 
 const TideForm: React.FC<TideFormProps> = ({ onSubmit }) => {
 	const methods = useForm<TideFormValues>({
@@ -64,7 +48,7 @@ const TideForm: React.FC<TideFormProps> = ({ onSubmit }) => {
 				height: 0,
 			},
 		},
-		resolver: yupResolver(schema),
+		resolver: zodResolver(schema),
 	});
 	const {
 		watch,
@@ -73,7 +57,7 @@ const TideForm: React.FC<TideFormProps> = ({ onSubmit }) => {
 		formState: { errors },
 	} = methods;
 
-	const onFormSubmit = (data: any): void => {
+	const onFormSubmit = (data: TideFormValues): void => {
 		const startingAt: Dayjs = dayjs(`${data.start.date} ${data.start.time}`);
 		const endingAt: Dayjs = dayjs(`${data.end.date} ${data.end.time}`);
 		const duration: number = Math.abs(startingAt.diff(endingAt, "minutes"));
