@@ -17,19 +17,54 @@ interface TideFormProps {
 	onSubmit: (data: Tide) => void;
 }
 
-const schema = z.object({
-	isRising: z.number(),
-	start: z.object({
-		date: z.string(),
-		time: z.string(),
-		height: z.number(),
-	}),
-	end: z.object({
-		date: z.string(),
-		time: z.string(),
-		height: z.number(),
-	}),
-});
+const schema = z
+	.object({
+		isRising: z.number(),
+		start: z
+			.object({
+				date: z.iso.date(),
+				time: z.iso.time(),
+				height: z.number(),
+			})
+			.required(),
+		end: z
+			.object({
+				date: z.iso.date(),
+				time: z.iso.time(),
+				height: z.number(),
+			})
+			.required(),
+	})
+	.refine(
+		(data) => {
+			const start = dayjs(`${data.start.date} ${data.start.time}`);
+			const end = dayjs(`${data.end.date} ${data.end.time}`);
+			return end.isAfter(start);
+		},
+		{
+			message:
+				"La date et l'heure de fin doivent être postérieures à celles de début.",
+			path: ["end"],
+		},
+	)
+	.refine(
+		(data) =>
+			data.isRising === 0 ? data.start.height > data.end.height : true,
+		{
+			message:
+				"La hauteur de la marée haute doit être supérieur à celle de la marée basse.",
+			path: ["start"],
+		},
+	)
+	.refine(
+		(data) =>
+			data.isRising === 1 ? data.start.height < data.end.height : true,
+		{
+			message:
+				"La hauteur de la marée basse doit être inférieur à celle de la marée haute.",
+			path: ["start"],
+		},
+	);
 
 type TideFormValues = z.infer<typeof schema>;
 
