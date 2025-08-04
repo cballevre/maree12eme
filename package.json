@@ -4,6 +4,7 @@
   "homepage": "https://cballevre.github.io/maree12eme",
   "private": true,
   "dependencies": {
+    "@astrojs/mdx": "^4.3.3",
     "@astrojs/react": "^4.3.0",
     "@chakra-ui/react": "3.19.2",
     "@emotion/react": "11.14.0",

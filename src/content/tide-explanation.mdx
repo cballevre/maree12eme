@@ -1,0 +1,87 @@
+import { TideDisplay } from '@/components/TideDisplay';
+
+## Explication du calcul
+
+Le calculateur se base sur la règle des douzièmes. Cette règle permet d’estimer rapidement la **hauteur d’eau** à une **heure donnée** pour une marée.
+
+Les données de marée nécessaires au calcul sont disponibles dans des guides fiables tels que l'[Almanach du Marin Breton](https://www.marinbreton.com/almanach) ou sur des sites spécialisés comme [marée.info](https://maree.info/).
+
+### 🧮 Étapes du calcul
+
+La méthode utilisée par le calculateur peut être faite manuellement en suivant les étapes suivantes :
+
+#### 1 - Noter les horaires et hauteurs
+
+On doit d'abord récupérer les informations suivantes :
+- Heure de marée **basse** (HB) et sa hauteur d'eau (hB)
+- Heure de marée **haute** (HH) et sa hauteur d'eau (hH)
+
+*Les guides peuvent utiliser des ports de référence, il faut alors appliquer les corrections fournies pour avoir les valeurs du port souhaité.*
+
+#### 2 - Calculer la durée d'une heure de marée
+
+Pour obtenir la durée d'une heure de marée, on doit d'abord calculer la durée totale de la marée (le temps entre la marée basse et la marée haute).
+
+**Durée totale** = Heure de marée **haute** (HH) - Heure de marée **basse** (HB)
+
+On peut ensuite la diviser par 6 pour obtenir une heure de marée.
+
+**Une heure de marée** = Durée totale / 6
+
+*Conseil : Il est plus facile de faire ces calculs en minutes.*
+
+#### 3 - Calculer les heures de marée
+
+Pour calculer les heures de marée, on ajoute successivement à l'heure de la marée basse (HB) des multiples de la durée d'**une heure de marée** jusqu'à atteindre l'heure de la marée haute (HH) :
+- 1re heure : HB + 1 * une heure de marée
+- 2e heure : HB + 2 * une heure de marée
+- ...
+- 6e heure : HH (marée haute)
+
+#### 4 - Tracer le graphique
+
+Pour déduire les **hauteurs d'eau** de chaque heure d'une marée, on peut faire un graphique. En utilisant la graduation de la règle des douzièmes on peut lisser la courbe sinusoïde d'une marée.
+
+Sur l'axe x, on suit la répartition suivante pour  :
+- heure du début de la marée (marée basse)
+- 1re heure : 1/12 du marnage
+- 2e heure : 2/12 du marnage
+- 3e heure : 3/12 du marnage
+- 4e heure : 3/12 du marnage
+- 5e heure : 2/12 du marnage
+- 6e heure : 1/12 du marnage
+La 6e heure correspond à la fin de la marée (marée haute).
+
+Sur l'axe y, on place les hauteurs d'eau correspondantes au début et à la fin de la marée. En traçant, la ligne entre les deux, on peut estimer les hauteurs des heures entre les deux.
+
+### 📊 Exemple
+
+**Marée basse :** 09h20 — Hauteur : 3,4 m<br/>
+**Marée haute :** 15h50 — Hauteur : 9,4 m<br/>
+**Durée :** 6h30 soit 65 minutes pour une heure de marée
+
+<TideDisplay
+  className="not-prose"
+  tide={{
+    "isRising": 1,
+    "start": {
+        "date": "2025-08-08",
+        "time": "09:20",
+        "height": 3.4
+    },
+    "end": {
+        "date": "2025-08-08",
+        "time": "15:50",
+        "height": 9.4
+    },
+    "duration": 390,
+    "hour": 65,
+    "range": 6
+  }} client:load />
+
+### ⚠️ À noter
+
+- Les calculs sont seulement valables pour des marées semi-diurnes (*2 par jour*).
+- Les calculs sont une approximation. Cela ne tient pas compte des fortes pressions.
+
+Penser à toujours rajouter une marge de sécurité (*pied de pilote*) quand vous naviguez.
