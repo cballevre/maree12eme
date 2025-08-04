@@ -1,52 +1,64 @@
-import { Field, Input, Wrap, WrapItem } from "@chakra-ui/react";
+import { Fieldset, Wrap, WrapItem } from "@chakra-ui/react";
 import { useFormContext } from "react-hook-form";
+import { FormField } from "./FormField";
 
 interface TideElementFieldProps {
 	namespace: string;
 }
 
 const TideElementField: React.FC<TideElementFieldProps> = ({ namespace }) => {
-	const { register } = useFormContext();
+	const {
+		register,
+		formState: { errors },
+	} = useFormContext();
 
 	return (
-		<Wrap gap={4} mb={4}>
-			<WrapItem>
-				<Field.Root>
-					<Field.Label>Date</Field.Label>
-					<Input
-						{...register(`${namespace}.date`)}
-						type="date"
-						variant="subtle"
-					/>
-				</Field.Root>
-			</WrapItem>
-			<WrapItem>
-				<Field.Root>
-					<Field.Label>Heure</Field.Label>
-					<Input
-						{...register(`${namespace}.time`)}
-						type="time"
-						variant="subtle"
-					/>
-				</Field.Root>
-			</WrapItem>
-			<WrapItem>
-				<Field.Root>
-					<Field.Label>Hauteur</Field.Label>
-					<Input
-						{...register(`${namespace}.height`, {
-							valueAsNumber: true,
-						})}
-						type="number"
-						step={0.01}
-						min={0}
-						max={20}
-						htmlSize={4}
-						variant="subtle"
-					/>
-				</Field.Root>
-			</WrapItem>
-		</Wrap>
+		<Fieldset.Root invalid={!!errors[namespace]} mb={4}>
+			<Fieldset.Content>
+				<Wrap gap={4}>
+					<WrapItem>
+						<FormField
+							label="Date"
+							name="date"
+							namespace={namespace}
+							type="date"
+							errors={errors}
+							register={register}
+							required
+						/>
+					</WrapItem>
+					<WrapItem>
+						<FormField
+							label="Heure"
+							name="time"
+							namespace={namespace}
+							type="time"
+							errors={errors}
+							register={register}
+							required
+						/>
+					</WrapItem>
+					<WrapItem>
+						<FormField
+							label="Hauteur"
+							name="height"
+							namespace={namespace}
+							type="number"
+							step={0.01}
+							min={0}
+							max={20}
+							htmlSize={4}
+							errors={errors}
+							register={register}
+							required
+						/>
+					</WrapItem>
+				</Wrap>
+			</Fieldset.Content>
+			{errors[namespace] ? (
+				<Fieldset.ErrorText>{errors[namespace].message}</Fieldset.ErrorText>
+			) : null}
+		</Fieldset.Root>
 	);
 };
 
