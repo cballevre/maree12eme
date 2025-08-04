@@ -1,73 +1,51 @@
-import { useFormikContext } from 'formik';
-import React from 'react';
-import { TideElement } from '../../models/tide';
-import { DATE, TIME, HEIGHT } from './fieldsNames';
-import {
-  Input,
-  Wrap,
-  WrapItem,
-  Field,
-} from '@chakra-ui/react';
+import { Field, Input, Wrap, WrapItem } from "@chakra-ui/react";
+import { useFormContext } from "react-hook-form";
 
-interface Props {
-  namespace: string;
+interface TideElementFieldProps {
+	namespace: string;
 }
 
-interface Fields {
-  start: TideElement;
-  end: TideElement;
-}
+const TideElementField: React.FC<TideElementFieldProps> = ({ namespace }) => {
+	const { register } = useFormContext();
 
-const TideElementField: React.FC<Props> = ({ namespace }) => {
-  const withNamespace = (fieldName: string): string =>
-    namespace !== '' ? `${namespace}.${fieldName}` : fieldName;
-
-  const formik = useFormikContext<Fields>();
-
-  return (
-    <Wrap gap={4} mb={4}>
-      <WrapItem>
-        <Field.Root>
-          <Field.Label>Date</Field.Label>
-          <Input
-            name={withNamespace(DATE)}
-            type="date"
-            value={formik.values[namespace as keyof Fields].date}
-            onChange={formik.handleChange}
-            variant="subtle"
-          />
-        </Field.Root>
-      </WrapItem>
-      <WrapItem>
-        <Field.Root>
-          <Field.Label>Heure</Field.Label>
-          <Input
-            name={withNamespace(TIME)}
-            type="time"
-            value={formik.values[namespace as keyof Fields].time}
-            onChange={formik.handleChange}
-            variant="subtle"
-          />
-        </Field.Root>
-      </WrapItem>
-      <WrapItem>
-        <Field.Root>
-          <Field.Label>Hauteur</Field.Label>
-          <Input
-            name={withNamespace(HEIGHT)}
-            type="number"
-            step={0.01}
-            min={0}
-            max={20}
-            htmlSize={4}
-            value={formik.values[namespace as keyof Fields].height}
-            onChange={formik.handleChange}
-            variant="subtle"
-          />
-        </Field.Root>
-      </WrapItem>
-    </Wrap>
-  );
+	return (
+		<Wrap gap={4} mb={4}>
+			<WrapItem>
+				<Field.Root>
+					<Field.Label>Date</Field.Label>
+					<Input
+						{...register(`${namespace}.date`)}
+						type="date"
+						variant="subtle"
+					/>
+				</Field.Root>
+			</WrapItem>
+			<WrapItem>
+				<Field.Root>
+					<Field.Label>Heure</Field.Label>
+					<Input
+						{...register(`${namespace}.time`)}
+						type="time"
+						variant="subtle"
+					/>
+				</Field.Root>
+			</WrapItem>
+			<WrapItem>
+				<Field.Root>
+					<Field.Label>Hauteur</Field.Label>
+					<Input
+						{...register(`${namespace}.height`)}
+						type="number"
+						step={0.01}
+						min={0}
+						max={20}
+						htmlSize={4}
+						variant="subtle"
+					/>
+				</Field.Root>
+			</WrapItem>
+		</Wrap>
+	);
 };
 
 export default TideElementField;
