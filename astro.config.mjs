@@ -3,6 +3,8 @@ import react from '@astrojs/react';
 import AstroPWA from '@vite-pwa/astro';
 import { defineConfig } from 'astro/config';
 
+import tailwindcss from '@tailwindcss/vite';
+
 // https://astro.build/config
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -48,4 +50,7 @@ export default defineConfig({
       clientsClaim: true,
     },
   }),],
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });
