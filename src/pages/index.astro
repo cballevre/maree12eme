@@ -5,5 +5,8 @@ import Layout from '@/layouts/Layout.astro';
 ---
 <Layout title="Maree 12ème">
   <TideCalculator client:load />
+  <article class="prose prose-slate">
+    <TideExplanation />
+  </article>
   <TideExplanation />
 </Layout>
