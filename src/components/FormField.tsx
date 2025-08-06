@@ -1,5 +1,5 @@
-import { Field, Input } from '@chakra-ui/react';
-import type { FC } from 'react';
+import { Input } from '@cballevre/kiwi-ui';
+import { forwardRef } from 'react';
 import type {
   FieldErrors,
   FieldValues,
@@ -13,49 +13,47 @@ interface FormFieldProps {
   namespace?: string;
   name: string;
   register: UseFormRegister<FieldValues>;
+  error?: string | boolean;
   errors: FieldErrors<FieldValues>;
   // biome-ignore lint/suspicious/noExplicitAny: Allow additional props
   [key: string]: any;
 }
 
-const FormField: FC<FormFieldProps> = ({
-  label,
-  required = false,
-  namespace,
-  name,
-  register,
-  errors,
-  type,
-  ...rest
-}) => {
-  const fieldName = namespace ? `${namespace}.${name}` : name;
-  const fieldErrors = namespace
-    ? (errors[namespace] as Record<string, GlobalError>)?.[name]
-    : errors[name];
+const FormField = forwardRef<HTMLInputElement, FormFieldProps>(
+  (
+    {
+      label,
+      required = false,
+      namespace,
+      name,
+      register,
+      error,
+      errors,
+      type,
+      ...rest
+    },
+    ref,
+  ) => {
+    const fieldName = namespace ? `${namespace}.${name}` : name;
+    const fieldErrors = namespace
+      ? (errors[namespace] as Record<string, GlobalError>)?.[name]
+      : errors[name];
 
-  return (
-    <Field.Root
-      required={required}
-      invalid={
-        !!fieldErrors || (namespace !== undefined && !!errors[namespace])
-      }
-    >
-      <Field.Label>
-        {label} {required ? <Field.RequiredIndicator /> : null}
-      </Field.Label>
+    return (
       <Input
+        label={label}
+        name={fieldName}
+        type={type}
+        ref={ref}
+        {...rest}
         {...register(fieldName, {
           valueAsNumber: type === 'number',
         })}
-        type={type}
-        variant="subtle"
-        {...rest}
+        error={error ? error : fieldErrors ? fieldErrors.message : undefined}
+        required={required}
       />
-      {fieldErrors ? (
-        <Field.ErrorText>{fieldErrors.message}</Field.ErrorText>
-      ) : null}
-    </Field.Root>
-  );
-};
+    );
+  },
+);
 
 export { FormField };
