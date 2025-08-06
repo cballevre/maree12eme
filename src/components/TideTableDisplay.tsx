@@ -1,4 +1,11 @@
-import { Table } from '@chakra-ui/react';
+import {
+  Cell,
+  Column,
+  Row,
+  Table,
+  TableBody,
+  TableHeader,
+} from '@cballevre/kiwi-ui';
 
 import type { TideFragment } from '@/models/tide';
 
@@ -8,27 +15,25 @@ interface Props {
 
 const TideTableDisplay: React.FC<Props> = ({ rows }) => {
   return (
-    <Table.Root striped>
-      <Table.Header>
-        <Table.Row>
-          <Table.ColumnHeader></Table.ColumnHeader>
-          <Table.ColumnHeader>Heure</Table.ColumnHeader>
-          <Table.ColumnHeader textAlign="end">Hauteur (m)</Table.ColumnHeader>
-        </Table.Row>
-      </Table.Header>
-      <Table.Body>
+    <Table striped bordered>
+      <TableHeader>
+        <Column></Column>
+        <Column isRowHeader>Heure</Column>
+        <Column>Hauteur (m)</Column>
+      </TableHeader>
+      <TableBody>
         {rows.map((row) => (
-          <Table.Row key={row.index}>
-            <Table.Cell>{row.label}</Table.Cell>
-            <Table.Cell>{row.time}</Table.Cell>
-            <Table.Cell textAlign="end">
-              {Math.round(row.height * 100) / 100}
-            </Table.Cell>
-          </Table.Row>
+          <Row key={row.index}>
+            <Cell>{row.label}</Cell>
+            <Cell>{row.time}</Cell>
+            <Cell>{Math.round(row.height * 100) / 100}</Cell>
+          </Row>
         ))}
-      </Table.Body>
-    </Table.Root>
+      </TableBody>
+    </Table>
   );
 };
+
+// textAlign="end"
 
 export { TideTableDisplay };

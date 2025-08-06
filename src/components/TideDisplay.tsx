@@ -1,4 +1,4 @@
-import { Box, Stack, Switch, Text } from '@chakra-ui/react';
+import { SegmentedControl } from '@cballevre/kiwi-ui';
 import dayjs, { type Dayjs } from 'dayjs';
 import { type FC, useState } from 'react';
 
@@ -106,29 +106,24 @@ const TideDisplay: FC<TideDisplayProps> = ({ tide }) => {
 
   const data = Array(7).fill({}).reduce(test, []);
 
+  const onDisplayTypeChange = (value: string): void => {
+    setDisplayType(value === 'Graphique');
+  };
+
   return (
-    <Box>
-      <Stack direction="row" gap={1} alignItems="center" mb={4}>
-        <Text>Graphique</Text>
-        <Switch.Root
-          colorPalette="orange"
-          checked={displayType}
-          onChange={() => setDisplayType(!displayType)}
-        >
-          <Switch.HiddenInput />
-          <Switch.Control>
-            <Switch.Thumb />
-          </Switch.Control>
-          <Switch.Label />
-        </Switch.Root>
-        <Text>Liste</Text>
-      </Stack>
+    <div className="mb-6">
+      <SegmentedControl
+        options={['Graphique', 'Liste']}
+        value="Graphique"
+        onChange={onDisplayTypeChange}
+        className="mb-4"
+      />
       {displayType ? (
         <TideChartDisplay rows={data} />
       ) : (
         <TideTableDisplay rows={data} />
       )}
-    </Box>
+    </div>
   );
 };
 

@@ -1,14 +1,7 @@
-import {
-  Box,
-  Button,
-  HStack,
-  NativeSelect,
-  Separator,
-  Text,
-} from '@chakra-ui/react';
+import { Button, Divider, Form, SegmentedControl } from '@cballevre/kiwi-ui';
 import { zodResolver } from '@hookform/resolvers/zod';
 import dayjs, { type Dayjs } from 'dayjs';
-import { FormProvider, useForm } from 'react-hook-form';
+import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { TideElementField } from '@/components/TideElementForm';
@@ -72,7 +65,7 @@ type TideFormValues = z.infer<typeof schema>;
 const TideForm: React.FC<TideFormProps> = ({ onSubmit }) => {
   const methods = useForm<TideFormValues>({
     defaultValues: {
-      isRising: 0,
+      isRising: 1,
       start: {
         date: dayjs().format('YYYY-MM-DD'),
         time: dayjs().format('HH:mm'),
@@ -86,7 +79,7 @@ const TideForm: React.FC<TideFormProps> = ({ onSubmit }) => {
     },
     resolver: zodResolver(schema),
   });
-  const { watch, register, handleSubmit } = methods;
+  const { watch, handleSubmit, control } = methods;
 
   const onFormSubmit = (data: TideFormValues): void => {
     const startingAt: Dayjs = dayjs(`${data.start.date} ${data.start.time}`);
@@ -103,34 +96,38 @@ const TideForm: React.FC<TideFormProps> = ({ onSubmit }) => {
 
   return (
     <FormProvider {...methods}>
-      <Box p={6} bg="gray.200" borderRadius={6} mb={6}>
-        <form onSubmit={handleSubmit(onFormSubmit)}>
-          <NativeSelect.Root variant="subtle" mb={2} width={24}>
-            <NativeSelect.Field
-              {...register('isRising', {
-                valueAsNumber: true,
-              })}
-            >
-              <option value={0}>PM</option>
-              <option value={1}>BM</option>
-            </NativeSelect.Field>
-            <NativeSelect.Indicator />
-          </NativeSelect.Root>
-          <TideElementField namespace="start" />
-          <HStack mb={2}>
-            <Text as="b" flexShrink={0}>
-              {watch('isRising') === 1 ? 'PM' : 'BM'}
-            </Text>
-            <Separator flex="1" borderColor="black" />
-          </HStack>
-          <TideElementField namespace="end" />
-          <Box mt={4}>
-            <Button colorPalette="blue" variant="solid" type="submit">
-              Calculer
-            </Button>
-          </Box>
-        </form>
-      </Box>
+      <Form
+        className="mb-6 p-6 flex flex-col gap-4 items-start border border-gray-200 rounded-lg"
+        onSubmit={handleSubmit(onFormSubmit)}
+      >
+        <Controller
+          render={({ field }) => (
+            <SegmentedControl
+              label="Type de marée"
+              options={[
+                {
+                  label: 'BM',
+                  value: 1,
+                },
+                {
+                  label: 'PM',
+                  value: 0,
+                },
+              ]}
+              {...field}
+            />
+          )}
+          control={control}
+          name="isRising"
+        />
+        <TideElementField namespace="start" />
+        <Divider
+          label={watch('isRising') === 1 ? 'PM' : 'BM'}
+          position="start"
+        />
+        <TideElementField namespace="end" />
+        <Button label="Calculer" type="submit" />
+      </Form>
     </FormProvider>
   );
 };

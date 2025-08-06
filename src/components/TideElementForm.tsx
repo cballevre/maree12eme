@@ -1,4 +1,4 @@
-import { Fieldset, Wrap, WrapItem } from '@chakra-ui/react';
+import { Text } from '@cballevre/kiwi-ui';
 import { useFormContext } from 'react-hook-form';
 
 import { FormField } from '@/components/FormField';
@@ -14,52 +14,49 @@ const TideElementField: React.FC<TideElementFieldProps> = ({ namespace }) => {
   } = useFormContext();
 
   return (
-    <Fieldset.Root invalid={!!errors[namespace]} mb={4}>
-      <Fieldset.Content>
-        <Wrap gap={4}>
-          <WrapItem>
-            <FormField
-              label="Date"
-              name="date"
-              namespace={namespace}
-              type="date"
-              errors={errors}
-              register={register}
-              required
-            />
-          </WrapItem>
-          <WrapItem>
-            <FormField
-              label="Heure"
-              name="time"
-              namespace={namespace}
-              type="time"
-              errors={errors}
-              register={register}
-              required
-            />
-          </WrapItem>
-          <WrapItem>
-            <FormField
-              label="Hauteur"
-              name="height"
-              namespace={namespace}
-              type="number"
-              step={0.01}
-              min={0}
-              max={20}
-              htmlSize={4}
-              errors={errors}
-              register={register}
-              required
-            />
-          </WrapItem>
-        </Wrap>
-      </Fieldset.Content>
-      {errors[namespace] ? (
-        <Fieldset.ErrorText>{errors[namespace].message}</Fieldset.ErrorText>
+    <div>
+      <div className="flex flex-row flex-wrap gap-4">
+        <FormField
+          label="Date"
+          name="date"
+          namespace={namespace}
+          type="date"
+          error={!!errors[namespace]}
+          errors={errors}
+          register={register}
+          required
+        />
+        <FormField
+          label="Heure"
+          name="time"
+          namespace={namespace}
+          type="time"
+          error={!!errors[namespace]}
+          errors={errors}
+          register={register}
+          required
+        />
+        <FormField
+          label="Hauteur"
+          name="height"
+          namespace={namespace}
+          type="number"
+          step={0.01}
+          min={0}
+          max={20}
+          htmlsize={4}
+          error={!!errors[namespace]}
+          errors={errors}
+          register={register}
+          required
+        />
+      </div>
+      {errors[namespace]?.message ? (
+        <Text className="text-sm text-red-500">
+          {String(errors[namespace]?.message)}
+        </Text>
       ) : null}
-    </Fieldset.Root>
+    </div>
   );
 };
 
