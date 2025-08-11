@@ -1,4 +1,5 @@
 import { SegmentedControl } from '@cballevre/kiwi-ui';
+import clsx from 'clsx';
 import dayjs, { type Dayjs } from 'dayjs';
 import { type FC, useState } from 'react';
 
@@ -8,9 +9,10 @@ import type { Tide, TideFragment } from '@/models/tide';
 
 interface TideDisplayProps {
   tide: Tide;
+  className?: string;
 }
 
-const TideDisplay: FC<TideDisplayProps> = ({ tide }) => {
+const TideDisplay: FC<TideDisplayProps> = ({ tide, className }) => {
   const [displayType, setDisplayType] = useState<boolean>(true);
 
   const isTideRising = tide.isRising === 1;
@@ -111,7 +113,7 @@ const TideDisplay: FC<TideDisplayProps> = ({ tide }) => {
   };
 
   return (
-    <div className="mb-6">
+    <div className={clsx('mb-6', className)}>
       <SegmentedControl
         options={['Graphique', 'Liste']}
         value="Graphique"
