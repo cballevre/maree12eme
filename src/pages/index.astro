@@ -1,16 +1,18 @@
 ---
+import { Footer } from '@/components/Footer';
 import { TideCalculator } from '@/components/TideCalculator';
 import { Content as TideExplanation } from '@/content/tide-explanation.mdx';
 import Layout from '@/layouts/Layout.astro';
 import { Container, Text, Title } from '@cballevre/kiwi-ui';
 ---
 <Layout title="Maree 12ème">
-  <Container focusReadability className="mt-16">
+  <Container focusReadability className="my-16">
     <Title className="text-blue-500">Calculateur de marée</Title>
     <Text className="mb-6">Selon la règle des douzièmes</Text>
     <TideCalculator client:only="react" />
     <article class="prose">
       <TideExplanation />
     </article>
+    <Footer />
   </Container>
 </Layout>
